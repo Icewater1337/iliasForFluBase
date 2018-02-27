@@ -1,7 +1,9 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 
 /**
  * Created by Icewater on 23.02.2018.
@@ -20,15 +22,29 @@ public class Base {
 
         // url ga grabble
 
-        driver.get("http://www.google.ch");
+        driver.get("https://ilias.unibe.ch/login.php?target=&client_id=ilias3_unibe");
 
-        // grabblet es feld, nach re bestimmte position:
-        WebElement test  = driver.findElement(By
-                .xpath("/html/body//form//input[@type='text']"));
+        WebElement loginField = driver.findElement(By.id("user_idp_iddtext"));
+        loginField.sendKeys(Keys.CONTROL + "a");
+        loginField.sendKeys(Keys.DELETE);
+        loginField.sendKeys("Universität Bern");
 
-        // grabblet dr ds html vo me bestimmte ding
 
-        WebElement element = driver.findElement(By.id("idVoMeHtmlElement"));
-        String elementHtml = element.getAttribute("outerHTML");
+        driver.findElement(By.id("wayf_submit_button")).click();
+
+
+        WebElement username = driver.findElement(By.id("username"));
+        username.sendKeys("sendUsername");
+        WebElement password = driver.findElement(By.id("password"));
+        password.sendKeys("sendPassword");
+        password.sendKeys(Keys.ENTER);
+
+        //WebElement submitBtn = driver.findElement(By.xpath("//input[@name='_eventId_proceed' and @type='submit']"));
+
+
+
+        System.out.println("stop");
+       // WebElement element = driver.findElement(By.id("idVoMeHtmlElement"));
+        //String elementHtml = element.getAttribute("outerHTML");
     }
 }
